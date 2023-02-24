@@ -132,7 +132,22 @@ div {
 
 .Accordians{
   height: 5vh;
-  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  background-size: cover;
+  padding: 8px;
+  width: -webkit-fill-available;
+  background-color: indianred;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  margin-left: 6px;
+  margin-right: 6px;
+  border-radius: 10px;
+}
+
+.DestAccordians{
+  height: 613px;
   justify-content: center;
   align-content: center;
   flex-direction: column;
