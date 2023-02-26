@@ -82,10 +82,8 @@ div {
 .left-arrow, .right-arrow {
   position: absolute;
   z-index: 1;
-  top: 50%;
+  top: 12px;
   transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
   border-radius: 24px;
   background-color: white;
   border: 1px solid #ddd;
@@ -127,7 +125,7 @@ div {
 }
 
 .Active{
-  min-height: 35vh;
+  min-height: 60vh;
 }
 
 .Accordians{
@@ -147,17 +145,32 @@ div {
 }
 
 .DestAccordians{
-  height: 613px;
+  height: 150px;
   justify-content: center;
   align-content: center;
   flex-direction: column;
   background-size: cover;
   padding: 8px;
   width: -webkit-fill-available;
-  background-color: indianred;
+  background: 40%;
   margin-top: 3px;
   margin-bottom: 3px;
   margin-left: 6px;
   margin-right: 6px;
   border-radius: 10px;
+}
+
+.DestAccordiansHeader{
+  font-size: xxx-large;
+  font-family: cursive;
+}
+
+.DestAccordiansTagline{
+  font-size: x-large;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.DestAccordiansBullets{
+  font-size: large;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }

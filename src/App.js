@@ -2,26 +2,31 @@ import React, { useState, useEffect } from 'react';
 import tripData from "./stub_data.json";
 import './App.css';
 
-function handleClick(el) {
-  el.classList.toggle('Active');
-}
-
 function Carousel(props, label) {
+
   const children = props.slice();
 
+  const [acommBoxExpanded, setAccomBoxExpanded] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [length, setLength] = useState(children.length);
 
-  const next = () => {
+  const toggleDiv = (e) => {
+    setAccomBoxExpanded(!acommBoxExpanded);
+    e.stopPropagation();
+  };
+
+  const next = (e) => {
     if (currentIndex < (length - 1)) {
       setCurrentIndex(prevState => prevState + 1)
     }
+    e.stopPropagation();
   }
 
-  const prev = () => {
+  const prev = (e) => {
     if (currentIndex > 0) {
       setCurrentIndex(prevState => prevState - 1)
     }
+    e.stopPropagation();
   }
 
   useEffect(() => {
@@ -32,7 +37,7 @@ function Carousel(props, label) {
     <div className="carousel-container">
       <div className="carousel-wrapper">
         {currentIndex > 0 &&
-          <button onClick={prev} className="left-arrow">
+          <button onClick={(e) => prev(e)} className="left-arrow">
             {"("}
           </button>}
         <div className="carousel-content-wrapper">
@@ -40,7 +45,7 @@ function Carousel(props, label) {
 
           {children.map(
               item => (
-                <div key={item.id + " - " + item.label} className="Accordians" style={{ transform: `translateX(-${currentIndex * 103.5}%)` }} onClick={({ target }) => handleClick(target)}>
+                <div key={item.id + " - " + item.label} className={acommBoxExpanded ? "Active Accordians" : "Accordians"} style={{ transform: `translateX(-${currentIndex * 103.5}%)` }} onClick={(e) => toggleDiv(e)}>
                   {
                     item.label
                   }
@@ -51,7 +56,7 @@ function Carousel(props, label) {
           </div>
         </div>
         {currentIndex < (length - 1) &&
-          <button onClick={next} className="right-arrow">
+          <button onClick={(e) => next(e)} className="right-arrow">
           {")"}
           </button>}
       </div>
@@ -60,21 +65,30 @@ function Carousel(props, label) {
 }
 
 function DestinationCarousel(props) {
+
   const children = props.slice();
 
+  const [destBoxExpanded, setDestBoxExpanded] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [length, setLength] = useState(children.length);
 
-  const next = () => {
+  const toggleDiv = (e) => {
+    setDestBoxExpanded(!destBoxExpanded );
+    e.stopPropagation();
+  };
+
+  const next = (e) => {
     if (currentIndex < (length - 1)) {
-      setCurrentIndex(prevState => prevState + 1)
+      setCurrentIndex(prevState => (prevState + 1))
     }
+    e.stopPropagation();
   }
 
-  const prev = () => {
+  const prev = (e) => {
     if (currentIndex > 0) {
       setCurrentIndex(prevState => prevState - 1)
     }
+    e.stopPropagation();
   }
 
   useEffect(() => {
@@ -85,7 +99,7 @@ function DestinationCarousel(props) {
     <div className="carousel-container">
       <div className="carousel-wrapper">
         {currentIndex > 0 &&
-          <button onClick={prev} className="left-arrow">
+          <button onClick={(e) => prev(e)} className="left-arrow">
             &lt;
           </button>}
         <div className="carousel-content-wrapper">
@@ -93,9 +107,10 @@ function DestinationCarousel(props) {
 
           {children.map(
               item => (
-                <div key={item.id + item.country} className="DestAccordians Accordians" style={{ transform: `translateX(-${currentIndex * 103.5}%)` }} onClick={({ target }) => handleClick(target)}>
-                  {<p>{item.label}</p>}
-                  {<p>{item.description}</p>}
+                <div key={item.id + item.country} className={destBoxExpanded ? "Active DestAccordians Accordians" : "DestAccordians Accordians"} style={{ transform: `translateX(-${currentIndex * 103.5}%)` }} onClick={(e) => toggleDiv(e)}>
+                  {<div className="DestAccordiansHeader">{item.label}</div>}
+                  {<div className="DestAccordiansTagline">{item.description + " " + item.label}</div>}
+                  {<div className="DestAccordiansBullets">{item.description + " " + item.label + " "  + item.description + " " + item.label + " "  +  item.description + " " + item.label + " "  +  item.description + " " + item.label + " "  +  item.description + " " + item.label + " "  +  item.description}</div>}
                   {Carousel(item.acommodation, "Accomodation")}
                 </div>
               )
@@ -104,7 +119,7 @@ function DestinationCarousel(props) {
           </div>
         </div>
         {currentIndex < (length - 1) &&
-          <button onClick={next} className="right-arrow">
+          <button onClick={(e) => next(e)} className="right-arrow">
             &gt;
           </button>}
       </div>
