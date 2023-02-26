@@ -161,7 +161,7 @@ div {
 }
 
 .DestAccordiansHeader{
-  font-size: xxx-large;
+  font-size: xx-large;
   font-family: cursive;
 }
 
@@ -173,4 +173,14 @@ div {
 .DestAccordiansBullets{
   font-size: large;
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.AccomAccordiansHeader{
+  font-size: x-large;
+  font-family: cursive;
+}
+
+.AccomAccordiansTagline{
+  font-size: large;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }

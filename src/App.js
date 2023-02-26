@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import tripData from "./stub_data.json";
 import './App.css';
 
 function Carousel(props, label) {
@@ -38,14 +37,14 @@ function Carousel(props, label) {
       <div className="carousel-wrapper">
         {currentIndex > 0 &&
           <button onClick={(e) => prev(e)} className="left-arrow">
-            {"("}
+            {"<"}
           </button>}
         <div className="carousel-content-wrapper">
           <div className={label + " carousel-content"}>
 
-          {children.map(
+            {children.map(
               item => (
-                <div key={item.id + " - " + item.label} className={acommBoxExpanded ? "Active Accordians" : "Accordians"} style={{ transform: `translateX(-${currentIndex * 103.5}%)` }} onClick={(e) => toggleDiv(e)}>
+                <div key={item.id + " - " + item.label} className={acommBoxExpanded ? "Active AccomAccordiansHeader Accordians" : "AccomAccordiansHeader Accordians"} style={{ transform: `translateX(-${currentIndex * 103.5}%)` }} onClick={(e) => toggleDiv(e)}>
                   {
                     item.label
                   }
@@ -57,7 +56,7 @@ function Carousel(props, label) {
         </div>
         {currentIndex < (length - 1) &&
           <button onClick={(e) => next(e)} className="right-arrow">
-          {")"}
+            {">"}
           </button>}
       </div>
     </div>
@@ -73,7 +72,7 @@ function DestinationCarousel(props) {
   const [length, setLength] = useState(children.length);
 
   const toggleDiv = (e) => {
-    setDestBoxExpanded(!destBoxExpanded );
+    setDestBoxExpanded(!destBoxExpanded);
     e.stopPropagation();
   };
 
@@ -105,13 +104,16 @@ function DestinationCarousel(props) {
         <div className="carousel-content-wrapper">
           <div className={"Destination carousel-content"}>
 
-          {children.map(
+            {children.map(
               item => (
-                <div key={item.id + item.country} className={destBoxExpanded ? "Active DestAccordians Accordians" : "DestAccordians Accordians"} style={{ transform: `translateX(-${currentIndex * 103.5}%)` }} onClick={(e) => toggleDiv(e)}>
-                  {<div className="DestAccordiansHeader">{item.label}</div>}
-                  {<div className="DestAccordiansTagline">{item.description + " " + item.label}</div>}
-                  {<div className="DestAccordiansBullets">{item.description + " " + item.label + " "  + item.description + " " + item.label + " "  +  item.description + " " + item.label + " "  +  item.description + " " + item.label + " "  +  item.description + " " + item.label + " "  +  item.description}</div>}
-                  {Carousel(item.acommodation, "Accomodation")}
+                <div key={item.id} className={destBoxExpanded ? "Active DestAccordians Accordians" : "DestAccordians Accordians"} style={{ transform: `translateX(-${currentIndex * 103.5}%)` }} onClick={(e) => toggleDiv(e)}>
+                  {<div key={item.id + item.City} className="DestAccordiansHeader">{item.Name}</div>}
+                  {<div key={item.id + item.Neighborhood} className="DestAccordiansTagline">{item.Neighborhood}</div>}
+                  
+                  {Object.entries(item.bulletPoints).map(([key, value]) => (
+                    <div key={key}>"{value}"</div>
+                  ))}
+
                 </div>
               )
             )}
@@ -128,6 +130,19 @@ function DestinationCarousel(props) {
 }
 
 function App() {
+
+  const [tripData, setTripData] = useState([]);
+  useEffect(() => {
+    fetch("https://xryp-e5xj-oseo.n7.xano.io/api:-VCn350s/destinations_list")
+      .then((response) => response.json())
+      .then((data) => {
+/*         console.log(data); */
+        setTripData(data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
 
   return (
     <div className="App">
