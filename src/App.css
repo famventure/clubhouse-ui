@@ -158,6 +158,8 @@ div {
   margin-left: 6px;
   margin-right: 6px;
   border-radius: 10px;
+  background: rgba(225, 225, 225, .8);
+  color: black;
 }
 
 .DestAccordiansHeader{

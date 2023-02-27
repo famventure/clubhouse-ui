@@ -109,11 +109,12 @@ function DestinationCarousel(props) {
                 <div key={item.id} className={destBoxExpanded ? "Active DestAccordians Accordians" : "DestAccordians Accordians"} style={{ transform: `translateX(-${currentIndex * 103.5}%)` }} onClick={(e) => toggleDiv(e)}>
                   {<div key={item.id + item.City} className="DestAccordiansHeader">{item.Name}</div>}
                   {<div key={item.id + item.Neighborhood} className="DestAccordiansTagline">{item.Neighborhood}</div>}
+                  <ul>
+                    {Object.entries(item.bulletPoints).map(([key, value]) => (
+                      <li key={key}>"{value}"</li>
+                    ))}
+                  </ul>
                   
-                  {Object.entries(item.bulletPoints).map(([key, value]) => (
-                    <div key={key}>"{value}"</div>
-                  ))}
-
                 </div>
               )
             )}
@@ -136,7 +137,7 @@ function App() {
     fetch("https://xryp-e5xj-oseo.n7.xano.io/api:-VCn350s/destinations_list")
       .then((response) => response.json())
       .then((data) => {
-/*         console.log(data); */
+        /*         console.log(data); */
         setTripData(data);
       })
       .catch((err) => {
