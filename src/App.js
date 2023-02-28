@@ -120,6 +120,7 @@ class DestCarousel extends React.Component {
       .then(res => res.json())
       .then(
         (result) => {
+          console.log(result);
           this.setState({
             isLoaded: true,
             tripData: result.slice(),
@@ -181,7 +182,7 @@ class DestCarousel extends React.Component {
                   item => (
                     <div key={item.id} className={this.state.destBoxExpanded ? "Active DestAccordians Accordians" : "DestAccordians Accordians"} style={{ transform: `translateX(-${this.state.currentIndex * 103.5}%)` }} onClick={(e) => this.toggleDiv(e)}>
                       {<div key={item.id + item.City} className="DestAccordiansHeader">{item.Name}</div>}
-                      {<div key={item.id + item.Neighborhood} className="DestAccordiansTagline">{item.Neighborhood}</div>}
+                      {<div key={item.id + item.Neighborhood} className="DestAccordiansTagline">{(item.Country == "United States" ? item.State: item.Country)}</div>}
                       <ul>
                         {Object.entries(item.bulletPoints).map(([key, value]) => (
                           <li key={key}>"{value}"</li>
